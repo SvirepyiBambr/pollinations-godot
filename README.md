@@ -12,7 +12,7 @@ billed to the API key's own Pollen (BYOP).
 3. Set your API key once at startup:
 
 ```gdscript
-Pollinations.api_key = "polli_…"  # https://enter.pollinations.ai/keys
+Pollinations.api_key = "sk_…"  # https://enter.pollinations.ai/keys
 ```
 
 ## Usage
@@ -49,6 +49,20 @@ NPC answers questions in-character with a rolling conversation memory:
 NPC: Ah, a traveler! I'm Marla, the village blacksmith — need a blade
 sharpened before the road takes you?
 ```
+
+## How players get their own keys (BYOP)
+
+Generation is billed to whichever API key the game presents, so each
+player pays with their own Pollen:
+
+- During **development**, the game author uses their own key from
+  <https://enter.pollinations.ai/keys> (keys come in `pk_`/`sk_` format —
+  use a secret `sk_` key for billing a personal account).
+- For **shipped games**, players sign in with the Pollinations
+  [device flow](https://github.com/pollinations/pollinations/blob/main/BRING_YOUR_OWN_POLLEN.md#%EF%B8%8F-clis--headless-apps-device-flow)
+  (open a URL, enter a code, paste the returned key into the game's
+  settings screen); the game should store it per-player and never bundle
+  a shared key.
 
 ## Models
 
