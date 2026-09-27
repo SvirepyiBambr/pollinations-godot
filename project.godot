@@ -1,0 +1,7 @@
+config_version=5
+
+[application]
+config/name="pollinations-godot"
+
+[editor_plugins]
+enabled=PackedStringArray("res://addons/pollinations/plugin.cfg")

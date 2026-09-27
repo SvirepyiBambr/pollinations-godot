@@ -1,0 +1,32 @@
+name: CI
+
+# Verifies the addon with the official Godot 4.3 headless binary:
+# project import parses every script; --check-only validates the
+# client and the sample.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Download Godot 4.3 (headless)
+        run: |
+          curl -sL -o godot.zip \
+            "https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip"
+          unzip -o -q godot.zip
+          chmod +x Godot_v4.3-stable_linux.x86_64
+
+      - name: Import project (parses all scripts)
+        run: |
+          ./Godot_v4.3-stable_linux.x86_64 --headless --path . --import 2>&1 | tee import.log
+          ! grep -qiE "script error|parse error" import.log
+
+      - name: Check addon and sample scripts
+        run: |
+          ./Godot_v4.3-stable_linux.x86_64 --headless --check-only --script addons/pollinations/pollinations_client.gd --path .
+          ./Godot_v4.3-stable_linux.x86_64 --headless --check-only --script example/npc_dialogue.gd --path .
