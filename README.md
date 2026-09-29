@@ -80,3 +80,9 @@ headless binary (`--check-only` + project import) in CI
 ## License
 
 MIT
+
+## Live demo
+
+![Live API check](demo/live-run.png)
+
+Real run (2026-09-29) of the add-on's calls: `await client.generate_text(...)` (`POST /v1/chat/completions`) and `await client.generate_image(...)` (`POST /v1/images/generations`) against `gen.pollinations.ai` — HTTP 200, text reply and a 1024x1024 image saved to disk.
